@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: anon-telegram-bot
+    env: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: python webhook.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: RENDER_EXTERNAL_HOSTNAME
+        value: auto
+      - key: DB_PATH
+        value: data/anon_bot.db
